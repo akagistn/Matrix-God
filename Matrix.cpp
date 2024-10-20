@@ -40,6 +40,12 @@ namespace linalg {
       int ans = 1;
       for (int row = 0; row < m_rows; ++row) {
         std::string str = std::to_string(m_ptr[m_columns * row + col]);
+        while (str.size() > 0) {
+          if (str == "0" || !(str.back() == '0' || str.back() == '.')) {
+            break;
+          }
+          str.pop_back();
+        }
         ans = std::max(int(str.size()), ans);
       }
       max_lenght[col] = ans;
@@ -48,6 +54,12 @@ namespace linalg {
       os << "| ";
       for (int col = 0; col < m_columns; ++col) {
         std::string str = std::to_string(m_ptr[m_columns * row + col]);
+        while (str.size() > 0) {
+          if (str == "0" || !(str.back() == '0' || str.back() == '.')) {
+            break;
+          }
+          str.pop_back();
+        }
         if (col + 1 == m_columns) {
           os << std::string(max_lenght[col] - str.size(), ' ') << str;
           break;

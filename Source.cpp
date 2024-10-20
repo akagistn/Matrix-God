@@ -6,11 +6,11 @@
 
 int main() {
   try {
-
     // Use all constructors to create different matrices
 
     linalg::Matrix empty;
     linalg::Matrix one_dim(66);
+    linalg::Matrix two_dim(4, 8);
     linalg::Matrix m1 = { {6, 6}, {6, 4}, {1, 2} };
     linalg::Matrix m2 = { {6, 6, 3}, {6, 4, 2}, {1, 2, 3} };
     linalg::Matrix m3 = { {6, 5}, {4, 1} };
