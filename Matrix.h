@@ -1,5 +1,6 @@
 #pragma once
 #include <initializer_list>
+#include <iostream>
 
 namespace linalg {
   class Matrix {
@@ -10,13 +11,13 @@ namespace linalg {
     double epsilon;
     bool equal_numbers(double a, double b) const;
   public:
-    int rows();
-    int columns();
-    int volume();
-    bool empty();
+    int rows() const;
+    int columns() const;
+    int volume() const;
+    bool empty() const;
     void reshape(int rows, int cols);
     double determinant();
-    void printMatrix();
+    void printMatrix(std::ostream& os) const;
     void printMatrixInt();
 
     double& operator()(int row, int col);
@@ -27,6 +28,8 @@ namespace linalg {
     bool operator!=(const Matrix& other) const;
     Matrix operator+(const Matrix& other) const;
     Matrix operator*(const Matrix& other) const;
+    
+
 
     Matrix();
     Matrix(int rows);
@@ -37,6 +40,8 @@ namespace linalg {
     Matrix(std::initializer_list<std::initializer_list<double>> lst);
     ~Matrix();
   };
+
+  std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
 
   Matrix transpose(Matrix& m);
 }

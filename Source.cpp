@@ -35,26 +35,12 @@ int main() {
     std::cout << "\n" << val << "\n";
 
     linalg::Matrix mult = m7 * m5;
-    std::cout << "\n";
-    mult.printMatrix();
-    std::cout << "\n";
-
+    std::cout << "\n" << mult << "\n";
     linalg::Matrix eee{ {1, 0.1, -4},{0, 1, 2},{0.08, 0, 1} };
-    std::cout << "\n";
-    eee.printMatrix();
-    std::cout << "\n";
-    (eee*m2).printMatrix(); // produces right answer
-    std::cout << "\n";
 
-    m1.printMatrixInt();
-    m2.printMatrixInt();
-    m7.printMatrixInt();
-    m3.printMatrixInt();
-    test_copy.printMatrixInt();
-    m4.printMatrixInt();
-    m5.printMatrixInt();
-    m6.printMatrixInt();
-    test_real_print.printMatrix();
+    std::cout << "\n" << eee << "\n" << eee * m2 << "\n";
+    std::cout << m1 << m2 << m7 << m3 << test_copy 
+              << m4 << m5 << m6 << test_real_print;
     throw(5);
   }
   catch (std::string exc) {
