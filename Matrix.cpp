@@ -3,7 +3,11 @@
 #include <algorithm>
 #include <initializer_list>
 #include <string>
-#include <sstream>
+#include <cmath>
+
+bool linalg::Matrix::equal_numbers(double a, double b) {
+  return std::fabs(a - b) < epsilon;
+}
 
 int linalg::Matrix::rows() { return m_rows; }
 
@@ -129,18 +133,21 @@ linalg::Matrix::Matrix() {
   m_rows = 1;
   m_columns = 1;
   m_ptr = new double[1];
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(int rows) {
   m_rows = std::max(rows, 1);
   m_columns = 1;
   m_ptr = new double[rows];
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(int rows, int cols) {
   m_rows = std::max(rows, 1);
   m_columns = std::max(cols, 1);
   m_ptr = new double[rows * cols];
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(const Matrix& other) {
@@ -151,6 +158,7 @@ linalg::Matrix::Matrix(const Matrix& other) {
   for (int i = 0; i < sz; ++i) {
     m_ptr[i] = other.m_ptr[i];
   }
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(Matrix&& other) {
@@ -160,6 +168,7 @@ linalg::Matrix::Matrix(Matrix&& other) {
   other.m_ptr = 0;
   other.m_rows = 0;
   other.m_columns = 0;
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(std::initializer_list<double> lst) {
@@ -170,6 +179,7 @@ linalg::Matrix::Matrix(std::initializer_list<double> lst) {
   for (auto& value : lst) {
     m_ptr[ptr++] = value;
   }
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst) {
@@ -192,6 +202,7 @@ linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst)
       m_ptr[ptr++] = value;
     }
   }
+  double epsilon = 1e-9;
 }
 
 linalg::Matrix::~Matrix() {
