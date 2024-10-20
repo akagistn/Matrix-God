@@ -4,31 +4,19 @@
 #include "Matrix.h"
 
 int main() {
-  linalg::Matrix georgy(12, 13);
-  std::cout << "I am matrix god, i have " << georgy.columns() * georgy.rows() << " cells\n\n";
+  linalg::Matrix m1 = { {6, 6}, {6, 4}, {1, 2} };
+  linalg::Matrix m2 = { {6, 6, 3}, {6, 4, 2}, {1, 2, 3} };
+  linalg::Matrix m3 = { {6, 5}, {4, 1}};
+  linalg::Matrix m4 = { {1, 2}, {6, 4}, {9, 8} };
+  linalg::Matrix m5 = { {1, 4, 5, 6, 7} };
+  linalg::Matrix m6 = { {9}, {8}, {7}, {6}, {5} };
 
-  // Matrix a = {1, 2, 3, 4, 5, 6};
-  linalg::Matrix a(2, 3);
-
-  for (int i = 0; i < 2; ++i) {
-    for (int j = 0; j < 3; ++j) {
-      a(i, j) = i + j;
-    }
-  }
-  a.printMatrixInt();
-
-  linalg::Matrix b = linalg::transpose(a);
-
-  std::cout << a(1, 1) << "\n";
-  b.printMatrixInt();
-  // linalg::Matrix b = a;
-  a.reshape(3, 2);
-  linalg::Matrix c(a);
-
-  linalg::Matrix d(std::move(c));
-
-  int pause;
-  std::cin >> pause;
+  m1.printMatrixInt();
+  m2.printMatrixInt();
+  m3.printMatrixInt();
+  m4.printMatrixInt();
+  m5.printMatrixInt();
+  m6.printMatrixInt();
 
   return 0;
 }

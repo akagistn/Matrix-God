@@ -139,6 +139,28 @@ linalg::Matrix::Matrix(Matrix&& other) {
   other.m_columns = 0;
 }
 
+linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst) {
+  m_rows = lst.size();
+  if (m_rows <= 0) {
+    throw "Matrix cannot be empty";
+  }
+  m_columns = lst.begin()->size();
+  if (m_columns <= 0) {
+    throw "Matrix cannot be empty";
+  }
+  m_ptr = new double[m_rows * m_columns];
+  int ptr = 0;
+  for (const auto& row : lst) {
+    if (row.size() != m_columns) {
+      delete[] m_ptr;
+      throw "All rows must have the same number of columns";
+    }
+    for (const auto& value : row) {
+      m_ptr[ptr++] = value;
+    }
+  }
+}
+
 linalg::Matrix::~Matrix() {
   delete[] m_ptr;
 }

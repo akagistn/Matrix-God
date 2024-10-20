@@ -29,6 +29,7 @@ namespace linalg {
     Matrix(std::initializer_list<double> lst);
     Matrix(const Matrix& other);
     Matrix(Matrix&& other);
+    Matrix(std::initializer_list<std::initializer_list<double>> lst);
     ~Matrix();
   };
 
