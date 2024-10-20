@@ -133,12 +133,30 @@ bool linalg::Matrix::operator!=(const linalg::Matrix& other) const {
 linalg::Matrix linalg::Matrix::operator+(const Matrix& other) const {
   if (this->m_rows != other.m_rows ||
       this->m_columns != other.m_columns) {
-    throw "Matrix dimensions do not match";
+    throw "Matrix dimensions do not match (for addition)";
   }
   Matrix result(this->m_rows, this->m_columns);
   for (int i = 0; i < this->m_rows; ++i) {
     for (int j = 0; j < this->m_columns; ++j) {
       result(i, j) = (*this)(i, j) + other(i, j);
+    }
+  }
+  return result;
+}
+
+linalg::Matrix linalg::Matrix::operator*(const Matrix& other) const {
+  if (this->m_columns != other.m_rows) {
+    throw "Matrix dimensions do not match (for multiplication)";
+  }
+  Matrix result(this->m_rows, other.m_columns);
+  for (int i = 0; i < this->m_rows; ++i) {
+    for (int j = 0; j < other.m_columns; ++j) {
+
+      double cell_result = 0;
+      for (int cnt = 0; cnt < this->m_columns; ++cnt) {
+        cell_result += (*this)(i, cnt) * other(cnt, j);
+      }
+      result(i, j) = cell_result;
     }
   }
   return result;
