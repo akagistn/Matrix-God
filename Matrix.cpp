@@ -29,7 +29,7 @@ namespace linalg {
 
   double Matrix::determinant() {
     if (m_columns != m_rows) {
-      throw "rows and columns do not match";
+      throw std::runtime_error("rows and columns do not match");
     }
   }
 
@@ -76,14 +76,14 @@ namespace linalg {
 
   double& Matrix::operator()(int row, int col) {
     if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
-      throw std::string("out of range");
+      throw std::runtime_error("out of range");
     }
     return m_ptr[m_columns * row + col];
   }
 
   const double& Matrix::operator()(int row, int col) const {
     if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
-      throw "out of range";
+      throw std::runtime_error("out of range");
     }
     return m_ptr[row * m_columns + col];
   }
@@ -135,7 +135,7 @@ namespace linalg {
   Matrix linalg::Matrix::operator+(const Matrix& other) const {
     if (this->m_rows != other.m_rows ||
       this->m_columns != other.m_columns) {
-      throw "Matrix dimensions do not match (for addition)";
+      throw std::runtime_error("Matrix dimensions do not match (for addition)");
     }
     Matrix result(this->m_rows, this->m_columns);
     for (int i = 0; i < this->m_rows; ++i) {
@@ -148,7 +148,7 @@ namespace linalg {
 
   Matrix linalg::Matrix::operator*(const Matrix& other) const {
     if (this->m_columns != other.m_rows) {
-      throw "Matrix dimensions do not match (for multiplication)";
+      throw std::runtime_error("Matrix dimensions do not match (for multiplication)");
     }
     Matrix result(this->m_rows, other.m_columns);
     for (int i = 0; i < this->m_rows; ++i) {
@@ -221,18 +221,18 @@ namespace linalg {
     epsilon = 1e-9;
     m_rows = lst.size();
     if (m_rows <= 0) {
-      throw "Matrix cannot be empty";
+      throw std::runtime_error("Matrix cannot be empty");
     }
     m_columns = lst.begin()->size();
     if (m_columns <= 0) {
-      throw "Matrix cannot be empty";
+      throw std::runtime_error("Matrix cannot be empty");
     }
     m_ptr = new double[m_rows * m_columns];
     int ptr = 0;
     for (auto& row : lst) {
       if (row.size() != m_columns) {
         delete[] m_ptr;
-        throw "All rows must have the same number of columns";
+        throw std::runtime_error("All rows must have the same number of columns");
       }
       for (auto& value : row) {
         m_ptr[ptr++] = value;

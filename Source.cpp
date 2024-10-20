@@ -41,10 +41,14 @@ int main() {
     std::cout << "\n" << eee << "\n" << eee * m2 << "\n";
     std::cout << m1 << m2 << m7 << m3 << test_copy 
               << m4 << m5 << m6 << test_real_print;
+
+    std::cout << m1 + m2 << "gg";
+    std::cout << m1 * m7;
+
     throw(5);
   }
-  catch (std::string exc) {
-    std::cout << exc;
+  catch (std::runtime_error err) {
+    std::cout << err.what();
   }
   catch (...) {
     std::cout << "untracked exception";
