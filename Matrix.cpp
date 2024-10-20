@@ -4,8 +4,9 @@
 #include <initializer_list>
 #include <string>
 #include <cmath>
+#include <iomanip>
 
-bool linalg::Matrix::equal_numbers(double a, double b) {
+bool linalg::Matrix::equal_numbers (double a, double b) const {
   return std::fabs(a - b) < epsilon;
 }
 
@@ -117,7 +118,7 @@ bool linalg::Matrix::operator==(const linalg::Matrix & other) const {
   }
   for (int i = 0; i < m_rows; ++i) {
     for (int j = 0; j < m_columns; ++j) {
-      if ((*this)(i, j) != other(i, j)) {
+      if (!this->equal_numbers(this->m_ptr[i*m_columns + j], other.m_ptr[i * m_columns + j])) {
         return false;
       }
     }
@@ -130,27 +131,28 @@ bool linalg::Matrix::operator!=(const linalg::Matrix& other) const {
 }
 
 linalg::Matrix::Matrix() {
+  epsilon = 1e-9;
   m_rows = 1;
   m_columns = 1;
   m_ptr = new double[1];
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(int rows) {
+  epsilon = 1e-9;
   m_rows = std::max(rows, 1);
   m_columns = 1;
   m_ptr = new double[rows];
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(int rows, int cols) {
+  epsilon = 1e-9;
   m_rows = std::max(rows, 1);
   m_columns = std::max(cols, 1);
   m_ptr = new double[rows * cols];
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(const Matrix& other) {
+  epsilon = 1e-9;
   m_rows = other.m_rows;
   m_columns = other.m_columns;
   int sz = m_rows * m_columns;
@@ -158,20 +160,20 @@ linalg::Matrix::Matrix(const Matrix& other) {
   for (int i = 0; i < sz; ++i) {
     m_ptr[i] = other.m_ptr[i];
   }
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(Matrix&& other) {
+  epsilon = 1e-9;
   m_ptr = other.m_ptr;
   m_rows = other.m_rows;
   m_columns = other.m_columns;
   other.m_ptr = 0;
   other.m_rows = 0;
   other.m_columns = 0;
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(std::initializer_list<double> lst) {
+  epsilon = 1e-9;
   m_ptr = new double[lst.size()];
   m_rows = lst.size();
   m_columns = 1;
@@ -179,10 +181,10 @@ linalg::Matrix::Matrix(std::initializer_list<double> lst) {
   for (auto& value : lst) {
     m_ptr[ptr++] = value;
   }
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst) {
+  epsilon = 1e-9;
   m_rows = lst.size();
   if (m_rows <= 0) {
     throw "Matrix cannot be empty";
@@ -202,7 +204,6 @@ linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst)
       m_ptr[ptr++] = value;
     }
   }
-  double epsilon = 1e-9;
 }
 
 linalg::Matrix::~Matrix() {

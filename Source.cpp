@@ -14,6 +14,11 @@ int main() {
   linalg::Matrix test_copy = linalg::Matrix{ 2, 2, 8 };
   linalg::Matrix test_real_print = { {1.228, -2}, {666, 0}, {-2192, -6.67} };
 
+  linalg::Matrix test_equal1 = { 5 };
+  linalg::Matrix test_equal2 = {5.0000000001};
+  linalg::Matrix copyyy = test_real_print;
+  std::cout << (test_equal1 == test_equal2) << " " << (copyyy != test_real_print) << "\n";
+  // std::cout << (std::fabs(double(5) - double(5)) < 1e-9) << "\n";
 
   m1.printMatrixInt();
   m2.printMatrixInt();
@@ -24,6 +29,8 @@ int main() {
   m5.printMatrixInt();
   m6.printMatrixInt();
   test_real_print.printMatrix();
+  
+  
 
   return 0;
 }
