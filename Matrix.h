@@ -14,6 +14,7 @@ namespace linalg {
     bool empty();
     void reshape(int rows, int cols);
     double determinant();
+    void printMatrix();
     void printMatrixInt();
 
     double& operator()(int row, int col);

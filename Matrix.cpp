@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <string>
+#include <sstream>
 
 int linalg::Matrix::rows() { return m_rows; }
 
@@ -23,6 +24,32 @@ double linalg::Matrix::determinant() {
   if (m_columns != m_rows) {
     throw "rows and columns do not match";
   }
+}
+
+void linalg::Matrix::printMatrix() {
+  int* max_lenght;
+  max_lenght = new int[m_columns] ;
+  for (int col = 0; col < m_columns; ++col) {
+    int ans = 1;
+    for (int row = 0; row < m_rows; ++row) {
+      std::string str = std::to_string(m_ptr[m_columns*row + col]);
+      ans = std::max(int(str.size()), ans);
+    }
+    max_lenght[col] = ans;
+  }
+  for (int row = 0; row < m_rows; ++row) {
+    std::cout << "| ";
+    for (int col = 0; col < m_columns; ++col) {
+      std::string str = std::to_string(m_ptr[m_columns * row + col]);
+      if (col + 1 == m_columns) {
+        std::cout << std::string(max_lenght[col] - str.size(), ' ') << str;
+        break;
+      }
+      std::cout << std::string(max_lenght[col] - str.size(), ' ') << str << "  ";
+    }
+    std::cout << " |\n";
+  }
+  delete max_lenght;
 }
 
 void linalg::Matrix::printMatrixInt() {
