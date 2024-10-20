@@ -17,10 +17,10 @@ int main() {
   }
   a.printMatrixInt();
 
-  // linalg::Matrix b = linalg::transpose(a);
+  linalg::Matrix b = linalg::transpose(a);
 
   std::cout << a(1, 1) << "\n";
-  a.printMatrixInt();
+  b.printMatrixInt();
   // linalg::Matrix b = a;
   a.reshape(3, 2);
   linalg::Matrix c(a);

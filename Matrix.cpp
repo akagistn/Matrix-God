@@ -123,7 +123,7 @@ linalg::Matrix linalg::transpose(linalg::Matrix& m) {
   m.printMatrixInt();
   for (int i = 0; i < m.rows(); ++i) {
     for (int j = 0; j < m.columns(); ++j) {
-      result(j, j * m.rows() + i) = m(i, i * m.columns() + j);
+      result(j, i) = m(i, j);
     }
   }
   return result;
