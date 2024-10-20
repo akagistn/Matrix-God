@@ -10,13 +10,17 @@ int main() {
   linalg::Matrix m4 = { {1, 2}, {6, 4}, {9, 8} };
   linalg::Matrix m5 = { {1, 4, 5, 6, 7} };
   linalg::Matrix m6 = { {9}, {8}, {7}, {6}, {5} };
+  linalg::Matrix m7 = {1, 2, 4, 6, 7, 9};
+
 
   m1.printMatrixInt();
   m2.printMatrixInt();
+  m7.printMatrixInt();
   m3.printMatrixInt();
   m4.printMatrixInt();
   m5.printMatrixInt();
   m6.printMatrixInt();
+  
 
   return 0;
 }

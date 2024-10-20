@@ -116,10 +116,6 @@ linalg::Matrix::Matrix(int rows, int cols) {
   m_ptr = new double[rows * cols];
 }
 
-linalg::Matrix::Matrix(std::initializer_list<double> lst) {
-  //
-}
-
 linalg::Matrix::Matrix(const Matrix& other) {
   m_rows = other.m_rows;
   m_columns = other.m_columns;
@@ -139,6 +135,16 @@ linalg::Matrix::Matrix(Matrix&& other) {
   other.m_columns = 0;
 }
 
+linalg::Matrix::Matrix(std::initializer_list<double> lst) {
+  m_ptr = new double[lst.size()];
+  m_rows = lst.size();
+  m_columns = 1;
+  int ptr = 0;
+  for (auto& value : lst) {
+    m_ptr[ptr++] = value;
+  }
+}
+
 linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst) {
   m_rows = lst.size();
   if (m_rows <= 0) {
@@ -150,12 +156,12 @@ linalg::Matrix::Matrix(std::initializer_list<std::initializer_list<double>> lst)
   }
   m_ptr = new double[m_rows * m_columns];
   int ptr = 0;
-  for (const auto& row : lst) {
+  for (auto& row : lst) {
     if (row.size() != m_columns) {
       delete[] m_ptr;
       throw "All rows must have the same number of columns";
     }
-    for (const auto& value : row) {
+    for (auto& value : row) {
       m_ptr[ptr++] = value;
     }
   }
