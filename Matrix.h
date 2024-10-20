@@ -17,8 +17,11 @@ namespace linalg {
     void printMatrixInt();
 
     double& operator()(int row, int col);
+    const double& operator()(int row, int col) const;
     Matrix& operator=(const linalg::Matrix& other);
     Matrix& operator=(Matrix&& other);
+    bool operator==(const Matrix& other) const;
+    bool operator!=(const Matrix& other) const;
 
     Matrix();
     Matrix(int rows);

@@ -27,5 +27,8 @@ int main() {
 
   linalg::Matrix d(std::move(c));
 
+  int pause;
+  std::cin >> pause;
+
   return 0;
 }

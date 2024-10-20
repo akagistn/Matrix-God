@@ -47,6 +47,13 @@ double& linalg::Matrix::operator()(int row, int col) {
   return m_ptr[m_columns * row + col];
 }
 
+const double& linalg::Matrix::operator()(int row, int col) const {
+  if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
+    throw "out of range";
+  }
+  return m_ptr[row * m_columns + col];
+}
+
 linalg::Matrix& linalg::Matrix::operator=(Matrix&& other) {
   if (this != &other) {
     delete[] m_ptr;
@@ -71,6 +78,24 @@ linalg::Matrix& linalg::Matrix::operator=(const linalg::Matrix& other) {
     }
   }
   return *this;
+}
+
+bool linalg::Matrix::operator==(const linalg::Matrix & other) const {
+  if (m_rows != other.m_rows || m_columns != other.m_columns) {
+    return false;
+  }
+  for (int i = 0; i < m_rows; ++i) {
+    for (int j = 0; j < m_columns; ++j) {
+      if ((*this)(i, j) != other(i, j)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+bool linalg::Matrix::operator!=(const linalg::Matrix& other) const {
+  return !(*this == other);
 }
 
 linalg::Matrix::Matrix() {
