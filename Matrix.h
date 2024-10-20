@@ -7,6 +7,7 @@ private:
 public:
   int rows();
   int columns();
+  int volume();
   bool empty();
   void reshape(int rows, int cols);
 
@@ -14,5 +15,7 @@ public:
   Matrix(int rows);
   Matrix(int rows, int cols);
   ~Matrix();
+  Matrix(const Matrix& other);
+  Matrix(Matrix&& other);
 };
 
