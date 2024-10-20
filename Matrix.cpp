@@ -74,7 +74,7 @@ void linalg::Matrix::printMatrixInt() {
 
 double& linalg::Matrix::operator()(int row, int col) {
   if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
-    throw "out of range";
+    throw std::string("out of range");
   }
   return m_ptr[m_columns * row + col];
 }
@@ -86,7 +86,7 @@ const double& linalg::Matrix::operator()(int row, int col) const {
   return m_ptr[row * m_columns + col];
 }
 
-linalg::Matrix& linalg::Matrix::operator=(Matrix&& other) {
+linalg::Matrix& linalg::Matrix::operator= (Matrix&& other) {
   if (this != &other) {
     delete[] m_ptr;
     m_ptr = other.m_ptr;
@@ -128,6 +128,20 @@ bool linalg::Matrix::operator==(const linalg::Matrix & other) const {
 
 bool linalg::Matrix::operator!=(const linalg::Matrix& other) const {
   return !(*this == other);
+}
+
+linalg::Matrix linalg::Matrix::operator+(const Matrix& other) const {
+  if (this->m_rows != other.m_rows ||
+      this->m_columns != other.m_columns) {
+    throw "Matrix dimensions do not match";
+  }
+  Matrix result(this->m_rows, this->m_columns);
+  for (int i = 0; i < this->m_rows; ++i) {
+    for (int j = 0; j < this->m_columns; ++j) {
+      result(i, j) = (*this)(i, j) + other(i, j);
+    }
+  }
+  return result;
 }
 
 linalg::Matrix::Matrix() {
