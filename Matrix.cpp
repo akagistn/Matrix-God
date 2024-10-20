@@ -71,21 +71,6 @@ namespace linalg {
     delete max_lenght;
   }
 
-  void Matrix::printMatrixInt() {
-    for (int i = 0; i < m_rows; ++i) {
-      std::cout << "|";
-      for (int j = 0; j < m_columns; ++j) {
-        int tmp = m_ptr[m_columns * i + j];
-        if (j + 1 == m_columns) {
-          std::cout << tmp;
-          break;
-        }
-        std::cout << tmp << " ";
-      }
-      std::cout << "|\n";
-    }
-  }
-
   double& Matrix::operator()(int row, int col) {
     if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
       throw std::runtime_error("out of range");
@@ -263,7 +248,6 @@ namespace linalg {
 
   Matrix linalg::transpose(linalg::Matrix& m) {
     linalg::Matrix result(m.columns(), m.rows());
-    m.printMatrixInt();
     for (int i = 0; i < m.rows(); ++i) {
       for (int j = 0; j < m.columns(); ++j) {
         result(j, i) = m(i, j);

@@ -18,7 +18,6 @@ namespace linalg {
     void reshape(int rows, int cols);
     double determinant();
     void printMatrix(std::ostream& os) const;
-    void printMatrixInt();
 
     double& operator()(int row, int col);
     const double& operator()(int row, int col) const;
