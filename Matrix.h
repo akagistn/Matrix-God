@@ -8,7 +8,7 @@ namespace linalg {
     double* m_ptr;
     int m_rows;
     int m_columns;
-    double epsilon;
+    static double epsilon;
     bool equal_numbers(double a, double b) const;
   public:
     int rows() const;
