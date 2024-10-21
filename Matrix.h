@@ -27,7 +27,8 @@ namespace linalg {
     bool operator!=(const Matrix& other) const;
     Matrix operator+(const Matrix& other) const;
     Matrix operator*(const Matrix& other) const;
-    
+    Matrix operator*(double scalar) const;
+      
 
 
     Matrix();
@@ -39,6 +40,8 @@ namespace linalg {
     Matrix(std::initializer_list<std::initializer_list<double>> lst);
     ~Matrix();
   };
+
+  inline Matrix operator*(double scalar, Matrix& m) { return m * scalar; }
 
   std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
 
