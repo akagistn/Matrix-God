@@ -163,6 +163,16 @@ namespace linalg {
     return result;
   }
 
+  Matrix Matrix::operator*(double scalar) const {
+    Matrix result(m_rows, m_columns);
+    for (int i = 0; i < m_rows; ++i) {
+      for (int j = 0; j < m_columns; ++j) {
+        result(i, j) = (*this)(i, j) * scalar;
+      }
+    }
+    return result;
+  }
+
   Matrix::Matrix() {
     m_rows = 1;
     m_columns = 1;

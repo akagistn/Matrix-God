@@ -42,8 +42,13 @@ int main() {
     std::cout << m1 << m2 << m7 << m3 << test_copy 
               << m4 << m5 << m6 << test_real_print;
 
+    std::cout << eee * 2 << "\n" << 2 * eee;
+    std::cout << ((test_copy * 7) == (7 * test_copy));
+
     std::cout << m1 + m2 << "gg";
     std::cout << m1 * m7;
+
+    
 
     throw(5);
   }
