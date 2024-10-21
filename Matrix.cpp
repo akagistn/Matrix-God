@@ -130,6 +130,11 @@ namespace linalg {
     return *this;
   }
 
+  Matrix& Matrix::operator*=(const Matrix& other) {
+    (*this) = (*this) * other;
+    return (*this);
+  }
+
   Matrix& Matrix::operator*=(double scalar) {
     (*this) = (*this) * scalar;
     return (*this);
