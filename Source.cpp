@@ -46,7 +46,7 @@ int main() {
     std::cout << ((test_copy * 7) == (7 * test_copy)) << "\n";
     
     std::cout << m4;
-    m4 += 0.9 * m4;
+    m4 -= 0.9 * m4;
     std::cout << m4;
     m4 += m5;
 

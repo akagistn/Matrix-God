@@ -115,13 +115,18 @@ namespace linalg {
 
   Matrix& Matrix::operator+=(const Matrix& other) {
     if (this->m_rows != other.m_rows || this->m_columns != other.m_columns) {
-      throw std::runtime_error("Matrix dimensions do not match (cannot perform +=)");
+      throw std::runtime_error("Matrix dimensions do not match (cannot perform +/- = assignment)");
     }
     for (int i = 0; i < m_rows; ++i) {
       for (int j = 0; j < m_columns; ++j) {
         (*this)(i, j) += other(i, j);
       }
     }
+    return *this;
+  }
+
+  Matrix& Matrix::operator-=(const Matrix& other) {
+    *(this) += -other;
     return *this;
   }
 
@@ -179,6 +184,16 @@ namespace linalg {
     for (int i = 0; i < m_rows; ++i) {
       for (int j = 0; j < m_columns; ++j) {
         result(i, j) = (*this)(i, j) * scalar;
+      }
+    }
+    return result;
+  }
+
+  Matrix Matrix::operator-() const {
+    Matrix result(m_rows, m_columns);
+    for (int i = 0; i < m_rows; ++i) {
+      for (int j = 0; j < m_columns; ++j) {
+        result(i, j) = -(*this)(i, j);
       }
     }
     return result;
