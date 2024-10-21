@@ -130,6 +130,11 @@ namespace linalg {
     return *this;
   }
 
+  Matrix& Matrix::operator*=(double scalar) {
+    (*this) = (*this) * scalar;
+    return (*this);
+  }
+
   bool Matrix::operator==(const Matrix& other) const {
     if (m_rows != other.m_rows || m_columns != other.m_columns) {
       return false;

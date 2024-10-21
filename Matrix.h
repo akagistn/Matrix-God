@@ -25,6 +25,7 @@ namespace linalg {
     Matrix& operator=(Matrix&& other);
     Matrix& operator+=(const Matrix& other);
     Matrix& operator-=(const Matrix& other);
+    Matrix& operator*=(double scalar);
     bool operator==(const Matrix& other) const;
     bool operator!=(const Matrix& other) const;
     Matrix operator+(const Matrix& other) const;
