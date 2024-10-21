@@ -28,6 +28,7 @@ namespace linalg {
     bool operator==(const Matrix& other) const;
     bool operator!=(const Matrix& other) const;
     Matrix operator+(const Matrix& other) const;
+    Matrix operator-(const Matrix& other) const;
     Matrix operator*(const Matrix& other) const;
     Matrix operator*(double scalar) const;
     Matrix operator-() const;

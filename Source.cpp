@@ -36,7 +36,9 @@ int main() {
 
     linalg::Matrix mult = m7 * m5;
     std::cout << "\n" << mult << "\n";
-    linalg::Matrix eee{ {1, 0.1, -4},{0, 1, 2},{0.08, 0, 1} };
+    linalg::Matrix eee{ {1, 0.1, -4 }, {0, 1, 2},{0.08, 0, 1} };
+
+    std::cout << "\n" << test_real_print - test_real_print << m2 - eee;
 
     std::cout << "\n" << eee << "\n" << eee * m2 << "\n";
     std::cout << m1 << m2 << m7 << m3 << test_copy 

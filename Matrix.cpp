@@ -148,7 +148,7 @@ namespace linalg {
     return !(*this == other);
   }
 
-  Matrix linalg::Matrix::operator+(const Matrix& other) const {
+  Matrix Matrix::operator+(const Matrix& other) const {
     if (this->m_rows != other.m_rows ||
       this->m_columns != other.m_columns) {
       throw std::runtime_error("Matrix dimensions do not match (for addition)");
@@ -162,7 +162,12 @@ namespace linalg {
     return result;
   }
 
-  Matrix linalg::Matrix::operator*(const Matrix& other) const {
+  Matrix Matrix::operator-(const Matrix& other) const {
+    Matrix result = (*this) + (-other);
+    return result;
+  }
+
+  Matrix Matrix::operator*(const Matrix& other) const {
     if (this->m_columns != other.m_rows) {
       throw std::runtime_error("Matrix dimensions do not match (for multiplication)");
     }
