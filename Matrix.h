@@ -50,4 +50,6 @@ namespace linalg {
   std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
 
   Matrix transpose(Matrix& m);
+
+  Matrix concatenate(const Matrix& m1, const Matrix& m2);
 }

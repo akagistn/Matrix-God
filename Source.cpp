@@ -4,6 +4,8 @@
 #include <string>
 #include "Matrix.h"
 
+
+
 int main() {
   try {
     // Use all constructors to create different matrices
@@ -46,6 +48,8 @@ int main() {
 
     std::cout << eee * 2 << "\n" << 2 * eee;
     std::cout << ((test_copy * 7) == (7 * test_copy)) << "\n";
+
+    std::cout << "\nconcatenate:\n" << linalg::concatenate(eee, eee * 2);
     
     std::cout << "m4\n" <<m4;
     m4 -= 0.9 * m4;

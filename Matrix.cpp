@@ -302,4 +302,22 @@ namespace linalg {
     return result;
   }
 
+  Matrix concatenate(const Matrix& m1, const Matrix& m2) {
+    if (m1.rows() != m2.rows()) {
+      throw std::runtime_error("Cannot concatenate matrices, row numbers do not match");
+    }
+    Matrix result(m1.rows(), m1.columns() + m2.columns());
+    for (int i = 0; i < m1.rows(); ++i) {
+      for (int j = 0; j < m1.columns() + m2.columns(); ++j) {
+        if (j < m1.columns()) {
+          result(i, j) = m1(i, j);
+        }
+        else {
+          result(i, j) = m2(i, j - m1.columns());
+        }
+      }
+    }
+    return result;
+  }
+  
 }
