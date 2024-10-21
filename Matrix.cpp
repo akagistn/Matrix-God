@@ -87,7 +87,7 @@ namespace linalg {
     return m_ptr[row * m_columns + col];
   }
 
-  Matrix& linalg::Matrix::operator= (Matrix&& other) {
+  Matrix& linalg::Matrix::operator=(Matrix&& other) {
     if (this != &other) {
       delete[] m_ptr;
       m_ptr = other.m_ptr;
@@ -108,6 +108,18 @@ namespace linalg {
       m_ptr = new double[m_rows * m_columns];
       for (int i = 0; i < m_rows * m_columns; ++i) {
         m_ptr[i] = other.m_ptr[i];
+      }
+    }
+    return *this;
+  }
+
+  Matrix& Matrix::operator+=(const Matrix& other) {
+    if (this->m_rows != other.m_rows || this->m_columns != other.m_columns) {
+      throw std::runtime_error("Matrix dimensions do not match (cannot perform +=)");
+    }
+    for (int i = 0; i < m_rows; ++i) {
+      for (int j = 0; j < m_columns; ++j) {
+        (*this)(i, j) += other(i, j);
       }
     }
     return *this;
@@ -152,7 +164,6 @@ namespace linalg {
     Matrix result(this->m_rows, other.m_columns);
     for (int i = 0; i < this->m_rows; ++i) {
       for (int j = 0; j < other.m_columns; ++j) {
-
         double cell_result = 0;
         for (int cnt = 0; cnt < this->m_columns; ++cnt) {
           cell_result += (*this)(i, cnt) * other(cnt, j);

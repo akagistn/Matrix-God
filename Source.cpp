@@ -43,7 +43,12 @@ int main() {
               << m4 << m5 << m6 << test_real_print;
 
     std::cout << eee * 2 << "\n" << 2 * eee;
-    std::cout << ((test_copy * 7) == (7 * test_copy));
+    std::cout << ((test_copy * 7) == (7 * test_copy)) << "\n";
+    
+    std::cout << m4;
+    m4 += 0.9 * m4;
+    std::cout << m4;
+    m4 += m5;
 
     std::cout << m1 + m2 << "gg";
     std::cout << m1 * m7;
