@@ -15,7 +15,6 @@ namespace linalg {
     int getVolume() const;
     double getEpsilon() const;
     bool empty() const;
-    double determinant();
     void printMatrix(std::ostream& os) const;
 
     void reshape(int rows, int cols);
@@ -60,6 +59,8 @@ namespace linalg {
   Matrix gaussElimination(const Matrix& m);
 
   Matrix upperTriangle(const Matrix& m);
+
+  double determinant(const Matrix& m);
 
   Matrix transpose(const Matrix& m);
 

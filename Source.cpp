@@ -23,6 +23,16 @@ int main() {
     linalg::Matrix test_copy = linalg::Matrix{ 2, 2, 8 };
     linalg::Matrix test_real_print = { {1.228, -2}, {666, 0}, {-2192, -6.67} };
 
+    linalg::Matrix mdt1 = linalg::identityMatrix(6) * 2;
+    linalg::Matrix mdt2 = linalg::identityMatrix(4);
+
+    linalg::Matrix test_det = m2;
+    std::cout << "\n" << test_det << "\n" << linalg::gaussElimination(test_det)
+      << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::determinant(test_det)
+      << " (" << linalg::determinant(linalg::transpose(test_det)) << ")\n";
+
+    throw 1120;
+
     linalg::Matrix test_gauss = { {1, 2, 3}, {5, 0, 2}, {6, 0, 1} };
     std::cout << "Test Gauss:\n" << test_gauss << "\nto\n"
       << linalg::gaussElimination(test_gauss);

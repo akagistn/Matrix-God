@@ -20,12 +20,6 @@ namespace linalg {
 
   bool Matrix::empty() const { return m_rows != 0 && m_columns != 0; }
 
-  double Matrix::determinant() {
-    if (m_columns != m_rows) {
-      throw std::runtime_error("rows and columns do not match");
-    }
-  }
-
   void Matrix::printMatrix(std::ostream& os) const {
     int* max_lenght;
     max_lenght = new int[m_columns];
@@ -362,7 +356,7 @@ namespace linalg {
       if (main_row == -1) {
         continue;
       }
-      std::cout << "[." << main_row << ".]";
+      // std::cout << "[." << main_row << ".]";
       for (int row = available_row; row < dim; ++row) {
         if (!equalNumbers(result(row, col), 0, result.getEpsilon()) 
           && row != main_row  && !fixed_rows[row]) {
@@ -403,6 +397,19 @@ namespace linalg {
       }
     }
 
+    return result;
+  }
+
+  double determinant(const Matrix& m) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Determinant is available only for square matrices");
+    }
+    Matrix triangle = upperTriangle(m);
+    int dim = triangle.getRows();
+    double result = 1;
+    for (int i = 0; i < dim; ++i) {
+      result *= triangle(i, i);
+    }
     return result;
   }
 
