@@ -9,15 +9,17 @@ namespace linalg {
     int m_rows;
     int m_columns;
     static double epsilon;
-    bool equalNumbers(double a, double b) const;
   public:
     int getRows() const;
     int getColumns() const;
     int getVolume() const;
     bool empty() const;
-    void reshape(int rows, int cols);
+    bool equalNumbers(double a, double b) const;
     double determinant();
     void printMatrix(std::ostream& os) const;
+
+    void reshape(int rows, int cols);
+    void addRows(int source_row, int target_row, double coef);
 
     double& operator()(int row, int col);
     const double& operator()(int row, int col) const;
@@ -50,6 +52,8 @@ namespace linalg {
   std::ostream& operator<<(std::ostream& os, const Matrix& m);
 
   Matrix identityMatrix(int dim);
+
+  Matrix gaussElimination(const Matrix& m);
 
   Matrix transpose(const Matrix& m);
 
