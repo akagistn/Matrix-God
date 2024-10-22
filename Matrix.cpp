@@ -79,6 +79,20 @@ namespace linalg {
     }
   }
 
+  void Matrix::swapRows(int row1, int row2) {
+    int len = this->m_rows;
+    for (int i = 0; i < len; ++i) {
+      std::swap((*this)(row1, i), (*this)(row2, i));
+    }
+  }
+
+  void Matrix::swapColumns(int col1, int col2) {
+    int len = this->m_columns;
+    for (int i = 0; i < len; ++i) {
+      std::swap((*this)(i, col1), (*this)(i, col2));
+    }
+  }
+
   double& Matrix::operator()(int row, int col) {
     if (row < 0 || col < 0 || row >= m_rows || col >= m_columns) {
       throw std::runtime_error("out of range");

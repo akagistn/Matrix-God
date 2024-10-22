@@ -27,6 +27,13 @@ int main() {
     std::cout << "Test Gauss:\n" << test_gauss << "\nto\n"
       << linalg::gaussElimination(test_gauss);
 
+    linalg::Matrix test_swap = { {1, 2, 3}, {0.08, 0, 2}, {6, -80, 1} };
+    std::cout << "Test swap:\n" << test_gauss;
+    test_gauss.swapColumns(0, 1);
+    std::cout << "to\n" << test_gauss;
+    test_gauss.swapRows(2, 1);
+    std::cout << "\nto\n" << test_gauss;
+
     // Test operator== and operator!=
 
     linalg::Matrix test_equal1 = { 5 };
