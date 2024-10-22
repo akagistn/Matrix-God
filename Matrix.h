@@ -52,4 +52,6 @@ namespace linalg {
   Matrix transpose(Matrix& m);
 
   Matrix concatenate(const Matrix& m1, const Matrix& m2);
+
+  Matrix power(const Matrix& m, int power);
 }

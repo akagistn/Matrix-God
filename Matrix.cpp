@@ -178,12 +178,12 @@ namespace linalg {
   }
 
   Matrix Matrix::operator*(const Matrix& other) const {
-    if (this->m_columns != other.m_rows) {
+    if (this->m_columns != other.rows()) {
       throw std::runtime_error("Matrix dimensions do not match (for multiplication)");
     }
-    Matrix result(this->m_rows, other.m_columns);
+    Matrix result(this->m_rows, other.columns());
     for (int i = 0; i < this->m_rows; ++i) {
-      for (int j = 0; j < other.m_columns; ++j) {
+      for (int j = 0; j < other.columns(); ++j) {
         double cell_result = 0;
         for (int cnt = 0; cnt < this->m_columns; ++cnt) {
           cell_result += (*this)(i, cnt) * other(cnt, j);
@@ -318,6 +318,30 @@ namespace linalg {
       }
     }
     return result;
+  }
+
+  Matrix power(const Matrix& m, int pow) {
+    if (m.rows() != m.columns()) {
+      throw(std::runtime_error("Non-square matrix cannot be raised to a power"));
+    }
+    if (pow == 0) {
+      //identity matrix
+    }
+    if (pow == 1) {
+      return m;
+    }
+    else if (pow < 0) {
+      //
+    }
+    else {
+      if (pow % 2) {
+        return m * power(m, pow - 1);
+      }
+      else {
+        Matrix sq_root = power(m, pow / 2);
+        return sq_root * sq_root;
+      }
+    }
   }
   
 }

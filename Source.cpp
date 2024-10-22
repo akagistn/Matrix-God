@@ -27,6 +27,13 @@ int main() {
 
     linalg::Matrix test_equal1 = { 5 };
     linalg::Matrix test_equal2 = { 5.0000000001 };
+
+    std::cout << linalg::power(m2, 7);
+    m2(1, 0) = 0;
+    m2(1, 1) = 0;
+    m2(1, 2) = 0;
+    std::cout << linalg::power(m2, 7);
+
     linalg::Matrix copyyy = test_real_print;
     std::cout << (test_equal1 == test_equal2) << " " << (copyyy != test_real_print) << "\n";
     // std::cout << (std::fabs(double(5) - double(5)) < 1e-9) << "\n";
