@@ -28,8 +28,10 @@ int main() {
     linalg::Matrix test_equal1 = { 5 };
     linalg::Matrix test_equal2 = { 5.0000000001 };
 
-    std::cout << linalg::power(linalg::identityMatrix(6), 123) + 
+    linalg::Matrix demo = linalg::power(linalg::identityMatrix(6), 123) + 
                  linalg::transpose(linalg::identityMatrix(6)) * 0.1;
+    demo.addRows(0,1,-1);
+    std::cout << demo;
 
     std::cout << linalg::power(m2, 7);
     m2(1, 0) = 0;

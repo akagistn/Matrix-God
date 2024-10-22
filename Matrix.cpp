@@ -10,15 +10,13 @@ namespace linalg {
 
   double Matrix::epsilon = 1e-9;
 
-  bool Matrix::equalNumbers(double a, double b) const {
-    return std::fabs(a - b) < epsilon;
-  }
-
   int Matrix::getRows() const { return m_rows; }
 
   int Matrix::getColumns() const { return m_columns; }
 
   int Matrix::getVolume() const { return m_rows * m_columns; }
+
+  double Matrix::getEpsilon() const { return epsilon; }
 
   bool Matrix::empty() const { return m_rows != 0 && m_columns != 0; }
 
@@ -152,7 +150,7 @@ namespace linalg {
     }
     for (int i = 0; i < m_rows; ++i) {
       for (int j = 0; j < m_columns; ++j) {
-        if (!this->equalNumbers(this->m_ptr[i * m_columns + j], other.m_ptr[i * m_columns + j])) {
+        if (equalNumbers(this->m_ptr[i * m_columns + j], other.m_ptr[i * m_columns + j], this->epsilon)) {
           return false;
         }
       }
@@ -298,6 +296,10 @@ namespace linalg {
     return os;
   }
 
+  bool equalNumbers(double a, double b, double eps) {
+    return std::fabs(a - b) < eps;
+  }
+
   Matrix identityMatrix(int dim) {
     if (dim <= 0) {
       throw std::runtime_error("Matrix dimensions can only be positive [identityMatrix]");
@@ -325,13 +327,16 @@ namespace linalg {
     for (int col = 0; col < dim; ++col) {
       int main_row = -1;
       for (int row = available_row; row < dim; ++row) {
-        if (!result.equalNumbers(result(row, col), 0)) {
+        if (equalNumbers(result(row, col), 0, result.getEpsilon())) {
           main_row = row;
           break;
         }
       }
       if (main_row == -1) {
         break;
+      }
+      for (int row = available_row; row < dim; ++row) {
+        //
       }
 
     }

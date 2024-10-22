@@ -13,8 +13,8 @@ namespace linalg {
     int getRows() const;
     int getColumns() const;
     int getVolume() const;
+    double getEpsilon() const;
     bool empty() const;
-    bool equalNumbers(double a, double b) const;
     double determinant();
     void printMatrix(std::ostream& os) const;
 
@@ -50,6 +50,8 @@ namespace linalg {
   inline Matrix operator*(double scalar, Matrix& m) { return m * scalar; }
 
   std::ostream& operator<<(std::ostream& os, const Matrix& m);
+
+  bool equalNumbers(double a, double b, double eps);
 
   Matrix identityMatrix(int dim);
 
