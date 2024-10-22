@@ -10,15 +10,15 @@ namespace linalg {
 
   double Matrix::epsilon = 1e-9;
 
-  bool Matrix::equal_numbers(double a, double b) const {
+  bool Matrix::equalNumbers(double a, double b) const {
     return std::fabs(a - b) < epsilon;
   }
 
-  int Matrix::rows() const { return m_rows; }
+  int Matrix::getRows() const { return m_rows; }
 
-  int Matrix::columns() const { return m_columns; }
+  int Matrix::getColumns() const { return m_columns; }
 
-  int Matrix::volume() const { return m_rows * m_columns; }
+  int Matrix::getVolume() const { return m_rows * m_columns; }
 
   bool Matrix::empty() const { return m_rows != 0 && m_columns != 0; }
 
@@ -146,7 +146,7 @@ namespace linalg {
     }
     for (int i = 0; i < m_rows; ++i) {
       for (int j = 0; j < m_columns; ++j) {
-        if (!this->equal_numbers(this->m_ptr[i * m_columns + j], other.m_ptr[i * m_columns + j])) {
+        if (!this->equalNumbers(this->m_ptr[i * m_columns + j], other.m_ptr[i * m_columns + j])) {
           return false;
         }
       }
@@ -178,12 +178,12 @@ namespace linalg {
   }
 
   Matrix Matrix::operator*(const Matrix& other) const {
-    if (this->m_columns != other.rows()) {
+    if (this->m_columns != other.getRows()) {
       throw std::runtime_error("Matrix dimensions do not match (for multiplication)");
     }
-    Matrix result(this->m_rows, other.columns());
+    Matrix result(this->m_rows, other.getColumns());
     for (int i = 0; i < this->m_rows; ++i) {
-      for (int j = 0; j < other.columns(); ++j) {
+      for (int j = 0; j < other.getColumns(); ++j) {
         double cell_result = 0;
         for (int cnt = 0; cnt < this->m_columns; ++cnt) {
           cell_result += (*this)(i, cnt) * other(cnt, j);
@@ -287,8 +287,8 @@ namespace linalg {
     delete[] m_ptr;
   }
 
-  std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
-    matrix.printMatrix(os);
+  std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+    m.printMatrix(os);
     return os;
   }
 
@@ -306,9 +306,9 @@ namespace linalg {
   }
 
   Matrix transpose(const linalg::Matrix& m) {
-    linalg::Matrix result(m.columns(), m.rows());
-    for (int i = 0; i < m.rows(); ++i) {
-      for (int j = 0; j < m.columns(); ++j) {
+    linalg::Matrix result(m.getColumns(), m.getRows());
+    for (int i = 0; i < m.getRows(); ++i) {
+      for (int j = 0; j < m.getColumns(); ++j) {
         result(j, i) = m(i, j);
       }
     }
@@ -316,17 +316,17 @@ namespace linalg {
   }
 
   Matrix concatenate(const Matrix& m1, const Matrix& m2) {
-    if (m1.rows() != m2.rows()) {
+    if (m1.getRows() != m2.getRows()) {
       throw std::runtime_error("Cannot concatenate matrices, row numbers do not match");
     }
-    Matrix result(m1.rows(), m1.columns() + m2.columns());
-    for (int i = 0; i < m1.rows(); ++i) {
-      for (int j = 0; j < m1.columns() + m2.columns(); ++j) {
-        if (j < m1.columns()) {
+    Matrix result(m1.getRows(), m1.getColumns() + m2.getColumns());
+    for (int i = 0; i < m1.getRows(); ++i) {
+      for (int j = 0; j < m1.getColumns() + m2.getColumns(); ++j) {
+        if (j < m1.getColumns()) {
           result(i, j) = m1(i, j);
         }
         else {
-          result(i, j) = m2(i, j - m1.columns());
+          result(i, j) = m2(i, j - m1.getColumns());
         }
       }
     }
@@ -334,7 +334,7 @@ namespace linalg {
   }
 
   Matrix power(const Matrix& m, int pow) {
-    if (m.rows() != m.columns()) {
+    if (m.getRows() != m.getColumns()) {
       throw(std::runtime_error("Non-square matrix cannot be raised to a power"));
     }
     if (pow == 0) {
