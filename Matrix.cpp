@@ -292,7 +292,20 @@ namespace linalg {
     return os;
   }
 
-  Matrix linalg::transpose(linalg::Matrix& m) {
+  Matrix identityMatrix(int dim) {
+    if (dim <= 0) {
+      throw std::runtime_error("Matrix dimensions can only be positive [identityMatrix]");
+    }
+    Matrix result(dim, dim);
+    for (int i = 0; i < dim; ++i) {
+      for (int j = 0; j < dim; ++j) {
+        result(i, j) = i == j ? 1 : 0;
+      }
+    }
+    return result;
+  }
+
+  Matrix transpose(const linalg::Matrix& m) {
     linalg::Matrix result(m.columns(), m.rows());
     for (int i = 0; i < m.rows(); ++i) {
       for (int j = 0; j < m.columns(); ++j) {
