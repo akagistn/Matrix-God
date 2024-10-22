@@ -21,7 +21,7 @@ namespace linalg {
     void reshape(int rows, int cols);
     void addRows(int source_row, int target_row, double coef);
     void swapRows(int row1, int row2);
-    void swapColumns(int row1, int row2);
+    void swapColumns(int col1, int col2);
 
     double& operator()(int row, int col);
     const double& operator()(int row, int col) const;

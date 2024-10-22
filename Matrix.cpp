@@ -376,6 +376,36 @@ namespace linalg {
     return result;
   }
 
+  Matrix upperTriangle(const Matrix& m) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("upperTriangle is available only for square matrices");
+    }
+    Matrix result = gaussElimination(m);
+    int dim = result.getRows();
+
+    int* fixed_rows = 0;
+    fixed_rows = new int[dim];
+    for (int i = 0; i < dim; ++i) {
+      fixed_rows[i] = 0;
+    }
+
+    int cur_row = 0;
+    for (int col = 0; col < dim; ++col) {
+      int main_row = -1;
+      for (int row = cur_row; row < dim; ++row) {
+        if (!equalNumbers(result(row, col), 0, result.getEpsilon())) {
+          main_row = row;
+          break;
+        }
+      }
+      if (main_row != -1) {
+        result.swapRows(main_row, cur_row++);
+      }
+    }
+
+    return result;
+  }
+
   Matrix transpose(const linalg::Matrix& m) {
     linalg::Matrix result(m.getColumns(), m.getRows());
     for (int i = 0; i < m.getRows(); ++i) {
