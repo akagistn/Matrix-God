@@ -413,6 +413,18 @@ namespace linalg {
     return result;
   }
 
+  double trace(const Matrix& m) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Trace is available only for square matrices");
+    }
+    int dim = m.getRows();
+    double result = 0;
+    for (int i = 0; i < dim; ++i) {
+      result += m(i, i);
+    }
+    return result;
+  }
+
   Matrix transpose(const linalg::Matrix& m) {
     linalg::Matrix result(m.getColumns(), m.getRows());
     for (int i = 0; i < m.getRows(); ++i) {

@@ -27,9 +27,11 @@ int main() {
     linalg::Matrix mdt2 = linalg::identityMatrix(4);
 
     linalg::Matrix test_det = m2;
-    std::cout << "\n" << test_det << "\n" << linalg::gaussElimination(test_det)
+    std::cout << "\n" << test_det
+      << "\n" << linalg::gaussElimination(test_det)
       << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::determinant(test_det)
-      << " (" << linalg::determinant(linalg::transpose(test_det)) << ")\n";
+      << " (" << linalg::determinant(linalg::transpose(test_det)) << ") ["
+      << linalg::trace(test_det) << "]\n";
 
     throw 1120;
 

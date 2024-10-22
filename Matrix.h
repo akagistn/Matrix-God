@@ -62,6 +62,8 @@ namespace linalg {
 
   double determinant(const Matrix& m);
 
+  double trace(const Matrix& m);
+
   Matrix transpose(const Matrix& m);
 
   Matrix concatenate(const Matrix& m1, const Matrix& m2);
