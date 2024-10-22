@@ -72,6 +72,8 @@ namespace linalg {
   }
 
   void Matrix::addRows(int source_row, int target_row, double coef) {
+    //std::cout << "adding rows(" << source_row << ", " 
+    //          << target_row << ", " << coef << ")\n";
     for (int i = 0; i < this->m_columns; ++i) {
       (*this)(target_row, i) += (((*this)(source_row, i)) * coef);
     }
@@ -313,6 +315,8 @@ namespace linalg {
     return result;
   }
   
+  // This does not exactly works as Gauss elimination method because it does not transmute rows
+  // Since it is not practical with single array realisation
   Matrix gaussElimination(const Matrix& m) {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Gauss elimination is available only for square matrices");
@@ -324,21 +328,35 @@ namespace linalg {
     int available_row = 0;
     // row_transmutation = new int[dim];
 
+    int* fixed_rows;
+    fixed_rows = new int[dim];
+    for (int i = 0; i < dim; ++i) {
+      fixed_rows[i] = 0;
+    }
+
     for (int col = 0; col < dim; ++col) {
       int main_row = -1;
-      for (int row = available_row; row < dim; ++row) {
-        if (equalNumbers(result(row, col), 0, result.getEpsilon())) {
+      for (int row = 0; row < dim; ++row) {
+        if (fixed_rows[row]) {
+          continue;
+        }
+        if (!equalNumbers(result(row, col), 0, result.getEpsilon())) {
           main_row = row;
           break;
         }
       }
       if (main_row == -1) {
-        break;
+        continue;
       }
+      std::cout << "[." << main_row << ".]";
       for (int row = available_row; row < dim; ++row) {
-        //
+        if (!equalNumbers(result(row, col), 0, result.getEpsilon()) 
+          && row != main_row  && !fixed_rows[row]) {
+          double coef = (result(row, col) / result(main_row, col));
+          result.addRows(main_row, row, -coef);
+        }
       }
-
+      fixed_rows[main_row] = 1;
     }
 
     return result;

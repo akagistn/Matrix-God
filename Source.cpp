@@ -23,6 +23,10 @@ int main() {
     linalg::Matrix test_copy = linalg::Matrix{ 2, 2, 8 };
     linalg::Matrix test_real_print = { {1.228, -2}, {666, 0}, {-2192, -6.67} };
 
+    linalg::Matrix test_gauss = { {1, 2, 3}, {5, 0, 2}, {6, 0, 1} };
+    std::cout << "Test Gauss:\n" << test_gauss << "\nto\n"
+      << linalg::gaussElimination(test_gauss);
+
     // Test operator== and operator!=
 
     linalg::Matrix test_equal1 = { 5 };
@@ -32,6 +36,8 @@ int main() {
                  linalg::transpose(linalg::identityMatrix(6)) * 0.1;
     demo.addRows(0,1,-1);
     std::cout << demo;
+    demo = linalg::gaussElimination(demo);
+    std::cout << "this is new matrix\n" << demo;
 
     std::cout << linalg::power(m2, 7);
     m2(1, 0) = 0;
@@ -51,6 +57,8 @@ int main() {
     linalg::Matrix mult = m7 * m5;
     std::cout << "\n" << mult << "\n";
     linalg::Matrix eee{ {1, 0.1, -4 }, {0, 1, 2},{0.08, 0, 1} };
+
+    std::cout << "eee matrix gaussElim: \n" << eee << "\nto\n" << linalg::gaussElimination(eee);
 
     std::cout << "\n" << test_real_print - test_real_print << m2 - eee;
 
