@@ -576,13 +576,13 @@ namespace linalg {
       throw(std::runtime_error("Non-square matrix cannot be raised to a power"));
     }
     if (pow == 0) {
-      //identity matrix
+      return identityMatrix(m.getRows());
     }
     if (pow == 1) {
       return m;
     }
     else if (pow < 0) {
-      //
+      return power(invert(m), -pow);
     }
     else {
       if (pow % 2) {
