@@ -14,7 +14,7 @@ int main() {
     linalg::Matrix one_dim(66);
     linalg::Matrix two_dim(4, 8);
     linalg::Matrix m1 = { {6, 6}, {6, 4}, {1, 2} };
-    linalg::Matrix m2 = { {2, 4, 7}, {6, 4, 2}, {1, 2, 3} };
+    linalg::Matrix m2 = { {1, 2, 0}, {3, 2, 1}, {0, 1, 2} };
     linalg::Matrix m3 = { {6, 5}, {4, 1} };
     linalg::Matrix m4 = { {1, 2}, {6, 4}, {9, 8} };
     linalg::Matrix m5 = { {0.9, 4.0, 55.54321, 6.0, -777.0} };
@@ -27,8 +27,9 @@ int main() {
     linalg::Matrix mdt2 = linalg::identityMatrix(4);
 
     linalg::Matrix test_det = m2;
-    std::cout << "\n" << test_det
+    std::cout << linalg::cofractor(m2, 0, 0) << "\n" << test_det
       << "\n" << linalg::gaussElimination(test_det)
+      << "\n" << linalg::invert(test_det) << "\n"
       << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::matrixGaussDeterminant(test_det)
       << "\n{" << linalg::minor(test_det, 1, 1) << "}\n"
       << " (" << linalg::matrixGaussDeterminant(linalg::transpose(test_det)) << ") ["

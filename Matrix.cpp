@@ -470,7 +470,16 @@ namespace linalg {
     if (equalNumbers(det, 0, m.getEpsilon())) {
       throw std::runtime_error("Determinant == 0, cannot invert matrix");
     }
-    
+    int dim = m.getRows();
+    Matrix result(dim, dim);
+    double det_m = m.determinant();
+    for (int i = 0; i < dim; ++i) {
+      for (int j = 0; j < dim; ++j) {
+        result(i, j) = cofractor(m, i, j) / det_m;
+      }
+    }
+    result = transpose(result);
+    return result;
   }
 
   Matrix transpose(const linalg::Matrix& m) {
