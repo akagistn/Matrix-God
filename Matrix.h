@@ -14,6 +14,7 @@ namespace linalg {
     int getColumns() const;
     int getVolume() const;
     double getEpsilon() const;
+    double determinant() const;
     bool empty() const;
     void printMatrix(std::ostream& os) const;
 
@@ -64,7 +65,7 @@ namespace linalg {
 
   Matrix upperTriangle(const Matrix& m);
 
-  double determinant(const Matrix& m);
+  double matrixGaussDeterminant(const Matrix& m);
 
   double trace(const Matrix& m);
 

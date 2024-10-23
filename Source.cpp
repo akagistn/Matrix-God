@@ -29,9 +29,9 @@ int main() {
     linalg::Matrix test_det = m2;
     std::cout << "\n" << test_det
       << "\n" << linalg::gaussElimination(test_det)
-      << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::determinant(test_det)
+      << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::matrixGaussDeterminant(test_det)
       << "\n{" << linalg::minor(test_det, 1, 1) << "}\n"
-      << " (" << linalg::determinant(linalg::transpose(test_det)) << ") ["
+      << " (" << linalg::matrixGaussDeterminant(linalg::transpose(test_det)) << ") ["
       << linalg::trace(test_det) << "]\n";
 
     throw 1120;

@@ -18,6 +18,10 @@ namespace linalg {
 
   double Matrix::getEpsilon() const { return epsilon; }
 
+  double Matrix::determinant() const {
+    return matrixGaussDeterminant(*this);
+  }
+
   bool Matrix::empty() const { return m_rows != 0 && m_columns != 0; }
 
   void Matrix::printMatrix(std::ostream& os) const {
@@ -328,7 +332,7 @@ namespace linalg {
         minor_(row__, col__) = m(row_, col_);
       }
     }
-    return determinant(minor_);
+    return matrixGaussDeterminant(minor_);
   }
 
   double cofractor(const Matrix& m, int row, int col) {
@@ -426,7 +430,7 @@ namespace linalg {
     return result;
   }
 
-  double determinant(const Matrix& m) {
+  double matrixGaussDeterminant(const Matrix& m) {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Determinant is available only for square matrices");
     }
@@ -455,13 +459,11 @@ namespace linalg {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Inversion is available only for square matrices");
     }
-    double det = determinant(m);
+    double det = matrixGaussDeterminant(m);
     if (equalNumbers(det, 0, m.getEpsilon())) {
       throw std::runtime_error("Determinant == 0, cannot invert matrix");
     }
     
-
-
   }
 
   Matrix transpose(const linalg::Matrix& m) {
