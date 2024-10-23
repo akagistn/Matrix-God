@@ -69,7 +69,7 @@ namespace linalg {
       }
       os << " |\n";
     }
-    delete max_lenght;
+    delete[] max_lenght;
   }
 
   void Matrix::reshape(int rows, int cols) {
@@ -408,10 +408,8 @@ namespace linalg {
     }
     // This function treats Matrix determinant as invariant
     Matrix result = m;
-    // int* row_transmutation;
     int dim = result.getRows();
     int available_row = 0;
-    // row_transmutation = new int[dim];
 
     int* fixed_rows;
     fixed_rows = new int[dim];
@@ -443,6 +441,7 @@ namespace linalg {
       }
       fixed_rows[main_row] = 1;
     }
+    delete[] fixed_rows;
 
     return result;
   }
@@ -473,6 +472,7 @@ namespace linalg {
         result.swapRows(main_row, cur_row++);
       }
     }
+    delete[] fixed_rows;
 
     return result;
   }
