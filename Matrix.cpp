@@ -331,6 +331,11 @@ namespace linalg {
     return determinant(minor_);
   }
 
+  double cofractor(const Matrix& m, int row, int col) {
+    if ((row + col) % 2) return -minor(m, row, col);
+    else return minor(m, row, col);
+  }
+
   Matrix identityMatrix(int dim) {
     if (dim <= 0) {
       throw std::runtime_error("Matrix dimensions can only be positive [identityMatrix]");

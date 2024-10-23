@@ -56,6 +56,8 @@ namespace linalg {
 
   double minor(const Matrix& m, int row, int col);
 
+  double cofractor(const Matrix& m, int row, int col);
+
   Matrix identityMatrix(int dim);
 
   Matrix gaussElimination(const Matrix& m);
