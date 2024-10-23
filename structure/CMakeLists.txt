@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+set(CMAKE_CXX_STANDARD 17)
+project("Matrix God")
+add_executable(build "source/Source.cpp")
+add_subdirectory(linalg/)
+target_link_libraries(build PUBLIC linalg)
