@@ -54,6 +54,8 @@ namespace linalg {
 
   bool equalNumbers(double a, double b, double eps);
 
+  double minor(const Matrix& m, int row, int col);
+
   Matrix identityMatrix(int dim);
 
   Matrix gaussElimination(const Matrix& m);
@@ -63,6 +65,8 @@ namespace linalg {
   double determinant(const Matrix& m);
 
   double trace(const Matrix& m);
+
+  Matrix invert(const Matrix& m);
 
   Matrix transpose(const Matrix& m);
 

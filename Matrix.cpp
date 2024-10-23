@@ -310,6 +310,27 @@ namespace linalg {
     return std::fabs(a - b) < eps;
   }
 
+  double minor(const Matrix& m, int row, int col) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Minor is available only for square matrices");
+    }
+    int dim = m.getRows();
+    if (dim == 1) {
+      throw std::runtime_error("Minor is not available for 1-dim matrices");
+    }
+    Matrix minor_(dim - 1, dim - 1);
+    for (int row_ = 0; row_ < dim; ++row_) {
+      for (int col_ = 0; col_ < dim; ++col_) {
+        if (row_ == row || col_ == col) continue;
+        int row__ = row_, col__ = col_;
+        if (row_ > row) --row__;
+        if (col_ > col) --col__;
+        minor_(row__, col__) = m(row_, col_);
+      }
+    }
+    return determinant(minor_);
+  }
+
   Matrix identityMatrix(int dim) {
     if (dim <= 0) {
       throw std::runtime_error("Matrix dimensions can only be positive [identityMatrix]");
@@ -423,6 +444,19 @@ namespace linalg {
       result += m(i, i);
     }
     return result;
+  }
+
+  Matrix invert(const Matrix& m) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Inversion is available only for square matrices");
+    }
+    double det = determinant(m);
+    if (equalNumbers(det, 0, m.getEpsilon())) {
+      throw std::runtime_error("Determinant == 0, cannot invert matrix");
+    }
+    
+
+
   }
 
   Matrix transpose(const linalg::Matrix& m) {
