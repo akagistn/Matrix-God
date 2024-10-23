@@ -222,6 +222,13 @@ namespace linalg {
     return result;
   }
 
+  Matrix Matrix::operator/(double scalar) const {
+    if (scalar == 0) {
+      throw std::runtime_error("cannot divide by 0");
+    }
+    return (*this) * (1.0 / scalar);
+  }
+
   Matrix Matrix::operator-() const {
     Matrix result(m_rows, m_columns);
     for (int i = 0; i < m_rows; ++i) {
