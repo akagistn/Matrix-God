@@ -519,8 +519,12 @@ namespace linalg {
 
   double matrixNorm(const Matrix& m) {
     double result = 0;
-    
-    return result;
+    for (int i = 0; i < m.getRows(); ++i) {
+      for (int j = 0; j < m.getColumns(); ++j) {
+        result += m(i, j) * m(i, j);
+      }
+    }
+    return sqrt(result);
   }
 
   Matrix invert(const Matrix& m) {
