@@ -15,6 +15,8 @@ namespace linalg {
     int getVolume() const;
     double getEpsilon() const;
     double determinant() const;
+    double trace() const;
+    double norm() const;
     bool empty() const;
     void printMatrix(std::ostream& os) const;
 
@@ -76,7 +78,9 @@ namespace linalg {
 
   double matrixLaplaceDeterminant(const Matrix& m);
 
-  double trace(const Matrix& m);
+  double matrixTrace(const Matrix& m);
+
+  double matrixNorm(const Matrix& m);
 
   Matrix invert(const Matrix& m);
 

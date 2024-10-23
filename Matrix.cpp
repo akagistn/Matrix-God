@@ -18,9 +18,11 @@ namespace linalg {
 
   double Matrix::getEpsilon() const { return epsilon; }
 
-  double Matrix::determinant() const {
-    return matrixGaussDeterminant(*this);
-  }
+  double Matrix::determinant() const { return matrixGaussDeterminant(*this); }
+
+  double Matrix::trace() const { return matrixTrace(*this); }
+
+  double Matrix::norm() const { return matrixNorm(*this); }
 
   bool Matrix::empty() const { return m_rows != 0 && m_columns != 0; }
 
@@ -71,10 +73,11 @@ namespace linalg {
   }
 
   void Matrix::reshape(int rows, int cols) {
-    if (rows <= 0 || cols <= 0 || rows * cols != m_rows * m_columns) { return; } // exception
+    if (rows <= 0 || cols <= 0 || rows * cols != m_rows * m_columns) {
+      throw std::runtime_error("Cannot reshape matrix with these parameters");
+    }
     m_rows = rows;
     m_columns = cols;
-    return;
   }
 
   void Matrix::addRows(int source_row, int target_row, double coef) {
@@ -502,7 +505,7 @@ namespace linalg {
     return result;
   }
 
-  double trace(const Matrix& m) {
+  double matrixTrace(const Matrix& m) {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Trace is available only for square matrices");
     }
@@ -511,6 +514,12 @@ namespace linalg {
     for (int i = 0; i < dim; ++i) {
       result += m(i, i);
     }
+    return result;
+  }
+
+  double matrixNorm(const Matrix& m) {
+    double result = 0;
+    
     return result;
   }
 

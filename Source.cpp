@@ -28,7 +28,7 @@ int main() {
 
     // linalg::Matrix test_det = m2;
     linalg::Matrix test_det = { {3, -1, 2, -1, 1},{5, 1, -2, 1, 2},
-                              {9, -1, 1, 3, 4},{3, 0, 6, -1, 3},{5, 2, 3, -2, 1} };
+                              {9, -1, 1, 3, 4},{3, 0, 6, -1, 3}, {5, 2, 3, -2, 1} };
 
     std::cout << linalg::cofractorGauss(m2, 0, 0) << "\n" << test_det
       << "\n" << linalg::gaussElimination(test_det)
