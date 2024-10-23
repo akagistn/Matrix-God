@@ -321,13 +321,17 @@ namespace linalg {
     return std::fabs(a - b) < eps;
   }
 
-  double minor(const Matrix& m, int row, int col) {
+  Matrix minorMatrix(const Matrix& m, int row, int col) {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Minor is available only for square matrices");
     }
     int dim = m.getRows();
     if (dim == 1) {
       throw std::runtime_error("Minor is not available for 1-dim matrices");
+    }
+    if (dim == 2) {
+      Matrix result = {m((row + 1) % 2, (col + 1) % 2)};
+      return result;
     }
     Matrix minor_(dim - 1, dim - 1);
     for (int row_ = 0; row_ < dim; ++row_) {
@@ -339,12 +343,37 @@ namespace linalg {
         minor_(row__, col__) = m(row_, col_);
       }
     }
-    return matrixGaussDeterminant(minor_);
+    return minor_;
   }
 
-  double cofractor(const Matrix& m, int row, int col) {
-    if ((row + col) % 2) return -minor(m, row, col);
-    else return minor(m, row, col);
+  double minorGauss(const Matrix& m, int row, int col) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Minor is available only for square matrices");
+    }
+    if (m.getRows() == 1) {
+      return m(0, 0);
+    }
+    return matrixGaussDeterminant(minorMatrix(m, row, col));
+  }
+
+  double minorLaplace(const Matrix& m, int row, int col) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Minor is available only for square matrices");
+    }
+    if (m.getRows() == 1) {
+      return m(0, 0);
+    }
+    return matrixLaplaceDeterminant(minorMatrix(m, row, col));
+  }
+
+  double cofractorGauss(const Matrix& m, int row, int col) {
+    if ((row + col) % 2) return -minorGauss(m, row, col);
+    else return minorGauss(m, row, col);
+  }
+
+  double cofractorLaplace(const Matrix& m, int row, int col) {
+    if ((row + col) % 2) return -minorLaplace(m, row, col);
+    else return minorLaplace(m, row, col);
   }
 
   Matrix identityMatrix(int dim) {
@@ -450,6 +479,21 @@ namespace linalg {
     return result;
   }
 
+  double matrixLaplaceDeterminant(const Matrix& m) {
+    if (m.getRows() != m.getColumns()) {
+      throw std::runtime_error("Determinant is available only for square matrices");
+    }
+    int dim = m.getRows();
+    if (dim == 2) {
+      return m(0, 0) * m(1, 1) - m(0, 1) * m(1, 0);
+    }
+    double result = 0;
+    for (int i = 0; i < dim; ++i) {
+      result += cofractorLaplace(m, 0, i) * m(0, i);
+    }
+    return result;
+  }
+
   double trace(const Matrix& m) {
     if (m.getRows() != m.getColumns()) {
       throw std::runtime_error("Trace is available only for square matrices");
@@ -475,7 +519,7 @@ namespace linalg {
     double det_m = m.determinant();
     for (int i = 0; i < dim; ++i) {
       for (int j = 0; j < dim; ++j) {
-        result(i, j) = cofractor(m, i, j) / det_m;
+        result(i, j) = cofractorGauss(m, i, j) / det_m;
       }
     }
     result = transpose(result);

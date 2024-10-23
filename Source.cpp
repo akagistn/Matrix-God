@@ -27,13 +27,13 @@ int main() {
     linalg::Matrix mdt2 = linalg::identityMatrix(4);
 
     linalg::Matrix test_det = m2;
-    std::cout << linalg::cofractor(m2, 0, 0) << "\n" << test_det
+    std::cout << linalg::cofractorGauss(m2, 0, 0) << "\n" << test_det
       << "\n" << linalg::gaussElimination(test_det)
       << "\n" << linalg::invert(test_det) << "\n"
       << "\n" << linalg::upperTriangle(test_det) << "\n" << linalg::matrixGaussDeterminant(test_det)
-      << "\n{" << linalg::minor(test_det, 1, 1) << "}\n"
+      << "\n{" << linalg::minorGauss(test_det, 1, 1) << "}\n"
       << " (" << linalg::matrixGaussDeterminant(linalg::transpose(test_det)) << ") ["
-      << linalg::trace(test_det) << "]\n";
+      << linalg::matrixLaplaceDeterminant(test_det) << "]\n";
 
     throw 1120;
 

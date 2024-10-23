@@ -56,9 +56,15 @@ namespace linalg {
 
   bool equalNumbers(double a, double b, double eps);
 
-  double minor(const Matrix& m, int row, int col);
+  Matrix minorMatrix(const Matrix& m, int row, int col);
 
-  double cofractor(const Matrix& m, int row, int col);
+  double minorGauss(const Matrix& m, int row, int col);
+
+  double minorLaplace(const Matrix& m, int row, int col);
+
+  double cofractorGauss(const Matrix& m, int row, int col);
+
+  double cofractorLaplace(const Matrix& m, int row, int col);
 
   Matrix identityMatrix(int dim);
 
@@ -67,6 +73,8 @@ namespace linalg {
   Matrix upperTriangle(const Matrix& m);
 
   double matrixGaussDeterminant(const Matrix& m);
+
+  double matrixLaplaceDeterminant(const Matrix& m);
 
   double trace(const Matrix& m);
 
