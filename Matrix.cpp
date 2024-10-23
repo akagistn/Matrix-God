@@ -30,7 +30,11 @@ namespace linalg {
     for (int col = 0; col < m_columns; ++col) {
       int ans = 1;
       for (int row = 0; row < m_rows; ++row) {
-        std::string str = std::to_string(m_ptr[m_columns * row + col]);
+        double num = (*this)(row, col);
+        if (equalNumbers(num, -0, epsilon)) {
+          num = +0;
+        }
+        std::string str = std::to_string(num);
         while (str.size() > 0) {
           if (str == "0" || !(str.back() == '0' || str.back() == '.')) {
             break;
@@ -44,7 +48,11 @@ namespace linalg {
     for (int row = 0; row < m_rows; ++row) {
       os << "| ";
       for (int col = 0; col < m_columns; ++col) {
-        std::string str = std::to_string(m_ptr[m_columns * row + col]);
+        double num = (*this)(row, col);
+        if (equalNumbers(num, -0, epsilon)) {
+          num = +0;
+        }
+        std::string str = std::to_string(num);
         while (str.size() > 0) {
           if (str == "0" || !(str.back() == '0' || str.back() == '.')) {
             break;
